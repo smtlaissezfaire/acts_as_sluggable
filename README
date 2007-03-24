@@ -10,7 +10,7 @@ URL slugs are unique within the specified scope (or all records if no scope is d
 
 
 == Installation
-<tt>./script/plugin install http://multi-up.ca/code/acts_as_slugable</tt>
+<tt>./script/plugin install http://code.dunae.ca/acts_as_slugable</tt>
 
 
 == Usage examples
@@ -43,4 +43,4 @@ To execute the unit tests run the default rake task (<tt>rake</tt>). To execute 
 
 == Credits
 
-Created by Alex Dunae (multi-up.ca), 2006-07
+Created by Alex Dunae (dunae.ca), 2006-07
