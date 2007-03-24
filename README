@@ -1,0 +1,46 @@
+= Acts as slugable readme
+
+Generates a URL slug based on a specific fields (e.g. title).
+
+A url slug is a string derived from a specific field which can the be used in a URL.  For instance, a page with the title <tt>My page</tt> would have a URL slug of <tt>my-page</tt>.
+
+The slug is generated on save and create actions.  If the field has an existing URL slug (like when editing an existing record) the URL slug is preserved.
+
+URL slugs are unique within the specified scope (or all records if no scope is defined).  If the slug already exists within the scope, <tt>-n</tt> is added (e.g. <tt>my-page-0</tt>, <tt>my-page-1</tt>, etc...
+
+
+== Installation
+<tt>./script/plugin install http://multi-up.ca/code/acts_as_slugable</tt>
+
+
+== Usage examples
+
+In your target table, add a column to hold the URL slug.
+
+
+=== With scope
+
+  class Page < ActiveRecord::Base
+    acts_as_slugable :source_column => :title, :target_column => :url_slug, :scope => :parent
+  end
+
+=== Without scope
+
+  class Post < ActiveRecord::Base
+    acts_as_slugable :source_column => :title, :target_column => :url_slug
+  end
+
+===  A sample link
+
+  link_to @page.title, :action => 'show', :url_slug => @page.url_slug
+
+
+== Testing
+
+The unit tests for this plugin use an in-memory sqlite3 database (http://www.sqlite.org/).
+
+To execute the unit tests run the default rake task (<tt>rake</tt>). To execute the unit tests but preserve to debug log run <tt>rake test</tt>.
+
+== Credits
+
+Created by Alex Dunae (multi-up.ca), 2006-07
