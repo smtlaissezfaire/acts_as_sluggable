@@ -1,3 +1,5 @@
-= Acts as slugable todo
+= Acts as slugable TODO
 
 * Allow URL slug length constraints
+* Convert accented characters more gracefully ('é' -> 'e')
+* Test with Unicode
