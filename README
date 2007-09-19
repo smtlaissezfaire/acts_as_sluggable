@@ -43,4 +43,6 @@ To execute the unit tests run the default rake task (<tt>rake</tt>). To execute 
 
 == Credits
 
-Created by Alex Dunae (dunae.ca), 2006-07
+Created by Alex Dunae (http://dunae.ca/), 2006-07
+
+Thanks to Andrew White (http://pixeltrix.co.uk/) for fixing a conflict with <tt>acts_as_list</tt>.

@@ -30,7 +30,7 @@ module Multiup
 
           if configuration[:scope].is_a?(Symbol)
             scope_condition_method = %(
-              def scope_condition
+              def slug_scope_condition
                 if #{configuration[:scope].to_s}.nil?
                   "#{configuration[:scope].to_s} IS NULL"
                 else
@@ -39,9 +39,9 @@ module Multiup
               end
             )
           elsif configuration[:scope].nil?
-            scope_condition_method = "def scope_condition() \"1 = 1\" end"
+            scope_condition_method = "def slug_scope_condition() \"1 = 1\" end"
           else
-            scope_condition_method = "def scope_condition() \"#{configuration[:scope]}\" end"
+            scope_condition_method = "def slug_scope_condition() \"#{configuration[:scope]}\" end"
           end
           
           class_eval <<-EOV
@@ -94,6 +94,9 @@ module Multiup
               #strip out common punctuation
               proposed_slug = test_string.strip.downcase.gsub(/[\'\"\#\$\,\.\!\?\%\@\(\)]+/, '')
 
+              #replace ampersand chars with 'and'
+              proposed_slug = proposed_slug.gsub(/&/, 'and')
+
               #replace non-word chars with dashes
               proposed_slug = proposed_slug.gsub(/[\W^-_]+/, '-')
 
@@ -105,7 +108,7 @@ module Multiup
               acts_as_slugable_class.transaction do
                 while existing != nil
                   # look for records with the same url slug and increment a counter until we find a unique slug
-                  existing = acts_as_slugable_class.find(:first, :conditions => ["url_slug = ? and #{scope_condition}",  proposed_slug + suffix])
+                  existing = acts_as_slugable_class.find(:first, :conditions => ["#{slug_column} = ? and #{slug_scope_condition}",  proposed_slug + suffix])
                   if existing
                     if suffix.empty?
                       suffix = "-0"
