@@ -38,13 +38,13 @@ class ActsAsSlugableTest < Test::Unit::TestCase
   end
 
   def test_update
-    pg = Page.create(:title => "New page")
+    pg = Page.create(:title => "Original page")
     assert pg.valid?
-    assert_equal "new-page", pg.url_slug
+    assert_equal "original-page", pg.url_slug
 
     # update, with title
     pg.update_attribute(:title, "Updated title only")
-    assert_equal "new-page", pg.url_slug
+    assert_equal "original-page", pg.url_slug
 
     # update, with title and nil slug
     pg.update_attributes(:title => "Updated title and slug to nil", :url_slug => nil)
@@ -81,6 +81,12 @@ class ActsAsSlugableTest < Test::Unit::TestCase
     assert pg2.valid?
 
     assert_equal pg1.url_slug, pg2.url_slug
+  end
+
+  def test_converting_ampersands
+    pg = Page.create(:title => "Test & test again")
+    assert pg.valid?
+    assert_equal "test-and-test-again", pg.url_slug
   end
 
   def test_characters
