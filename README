@@ -47,4 +47,4 @@ Created by Alex Dunae (http://dunae.ca/), 2006-07, though it takes a village to 
 
 Thanks to Andrew White (http://pixeltrix.co.uk/) for fixing a conflict with <tt>acts_as_list</tt>.
 
-Thanks to Phillip Hallstrom (http://pjkh.com/) for pointing out some redundant code.
+Thanks to Philip Hallstrom (http://pjkh.com/) for pointing out some redundant code.
